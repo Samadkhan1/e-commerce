@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Custom arrow styles */
+.custom-arrow {
+  width: 40px;
+  height: 40px;
+  background: rgba(218, 91, 91, 0.8);
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  transition: all 0.3s ease;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.custom-arrow:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.custom-arrow svg {
+  width: 20px;
+  height: 20px;
+  color: #333;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Position arrows */
+.next-arrow {
+  right: 10px;
+  background-color: red;
 }
+
+.prev-arrow {
+  left: 10px;
+}
+
+/* Hide arrows when not needed */
+.slick-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+

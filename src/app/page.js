@@ -1,103 +1,84 @@
-import Image from "next/image";
+import React from "react";
+import ProductSection from "../../components/productSection";
+import Link from "next/link";
+import SpecialOfferSection from "../../components/specialOfferSection";
+import AboutProducts from "../../components/aboutProducts";
+import Navbar from "../../components/navbar";
+import Footer from "../../components/footer";
 
-export default function Home() {
+const HomePage = () => {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div>
+      <Navbar />
+      <div className='  h-screen md:h-[550px] bg-center bg-fixed bg-cover z-0 bg-[url("https://images.unsplash.com/photo-1536924430914-91f9e2041b83?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxhY2slMjBhbmQlMjB3aGl0ZSUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D")] md:bg-[url("https://images.unsplash.com/photo-1567631643547-67a2dd59f266?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjA5fHxmYXNoaW9ufGVufDB8fDB8fHww")]'>
+        <div className="text-white flex flex-col  p-5 md:p-10  justify-center h-120">
+          <h1 className="flex font-semibold flex-col text-3xl text-center md:text-left md:text-7xl">
+            Raining Offers For <br /> Hot Summer!
+          </h1>
+          <h3 className="text-2xl md:text-3xl font-semibold mt-7 text-center md:text-left">
+            25% Off On All Products
+          </h3>
+          <div className="mt-7 flex flex-col md:flex-row ">
+            <Link
+              href={"/shop"}
+              className="transition-all text-center duration-200 bg-white border-2 mt-2 border-white cursor-pointer  hover:bg-transparent  hover:text-white md:mr-4   text-black px-6 py-3"
+            >
+              SHOP NOW
+            </Link>
+            <Link
+              href={"/shop"}
+              className="transition-all text-center duration-200 bg-transparent border-white  mt-2 border-2 hover:bg-white hover:border-white hover:text-black cursor-pointer text-white px-6 py-3"
+            >
+              FIND MORE
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div className="pt-10 bg-gray-200">
+        <h1 className="font-semibold text-gray-800 text-6xl text-center p-5">
+          Explore
+        </h1>
+        <div className="flex flex-col justify-between md:flex-row items-center  px-3 md:px-10 py-7">
+          <div className="text-white mt-4 m-2 md:w-95 w-full h-110 bg-center bg-cover bg-[url('https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjE4fHxmYXNoaW9ufGVufDB8fDB8fHww')]">
+            <div className="bg-black/50 h-full flex flex-col items-baseline justify-end px-6 py-8">
+              <h1 className="text-3xl m-2">Looking for Shoes?</h1>
+              <p className="m-1">Step into style, stride with confidence.</p>
+              <Link
+                href={"/shop"}
+                className="transition-all duration-200 bg-white border-2 mt-2 border-white cursor-pointer  hover:bg-transparent  hover:text-white md:mr-4   text-black px-6 py-3"
+              >
+                Shop Now
+              </Link>
+            </div>
+          </div>
+          <div className="text-white mt-4 m-2 md:w-95 w-full h-110 bg-center bg-cover bg-[url('https://images.unsplash.com/photo-1523297467724-f6758d7124c5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBmYXNoaW9ufGVufDB8fDB8fHww')]">
+            <div className="bg-black/50 h-full flex flex-col items-baseline justify-end px-6 py-8">
+              <h1 className="text-3xl m-2">Latest Eyewear For You</h1>
+              <p className="m-1">Sharp looks for sharper vision.</p>
+              <button className="transition-all duration-200 bg-white border-2 mt-2 border-white cursor-pointer  hover:bg-transparent  hover:text-white md:mr-4   text-black px-6 py-3">
+                Shop Now
+              </button>
+            </div>
+          </div>
+          <div className="text-white mt-4 m-2  md:w-95 w-full h-110 bg-center bg-cover bg-[url('https://images.unsplash.com/photo-1733470381591-c5dfb9df3c3d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGFraXN0YW5pJTIwZHJlc3N8ZW58MHx8MHx8fDA%3D')]">
+            <div className="bg-black/50 h-full flex flex-col items-baseline justify-end px-6 py-8">
+              <h1 className="text-3xl m-2">Cloths</h1>
+              <p className="m-1">Elevate your everyday style.</p>
+              <button className="transition-all duration-200  bg-white border-2 mt-2 border-white cursor-pointer  hover:bg-transparent  hover:text-white md:mr-4   text-black px-6 py-3">
+                Shop Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section>
+        <ProductSection />
+        <SpecialOfferSection />
+        <AboutProducts />
+      </section>
+      <Footer />
     </div>
   );
-}
+};
+
+export default HomePage;
