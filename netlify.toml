@@ -1,7 +1,16 @@
-# netlify.toml
 [build]
   command = "npm run build"
   publish = ".next"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+[functions]
+  directory = ".next/functions"
+
+# Add this to disable blobs temporarily
+[build.environment]
+  NETLIFY_BLOBS_DISABLED = "true"
+
+# Optional: Add redirects for Next.js
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/:splat"
+  status = 200

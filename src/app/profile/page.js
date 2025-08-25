@@ -27,7 +27,7 @@ const Profile = () => {
         <div className="w-full md:w-[80%]">
           <div className="bg-gray-400 p-4 md:p-8 flex items-center ">
             <div className="bg-gray-200 rounded-full overflow-hidden">
-              <img src={user?.image} alt={user?.firstName} />
+              <img src={user?.image?user?.image:"https://cdn-icons-png.flaticon.com/128/9408/9408175.png"} alt={user?.firstName} />
             </div>
             <div>
               <h1 className="text-3xl md:text-5xl font-semibold ml-5">

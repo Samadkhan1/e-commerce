@@ -4,22 +4,29 @@ import { useAuth } from "../providers/authProvider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const Login = (e) => {
+const Login = () => {
   const router = useRouter();
 
-  //   const [userName, setuserName] = useState("");
-  //   const [Password, setPassword] = useState("");
+  const [userName, setuserName] = useState("");
+  const [Password, setPassword] = useState("");
+  const [logInError, setlogInError] = useState("");
   const { login } = useAuth();
 
-  const username = "emilys";
-  const password = "emilyspass";
+  // const username = "emilys";
+  // const password = "emilyspass";
   async function Authenticate() {
-    try {
-      login(username, password);
-      router.push("/");
-    } catch (error) {
-      console.error(error);
-    }
+    login(userName, Password)
+      .then((data) => {
+        console.log(data);
+        router.push("/");
+      })
+      .catch((error) => setlogInError(error.response.data.message));
+  }
+
+  if (logInError) {
+    setTimeout(() => {
+      setlogInError("");
+    }, 5000);
   }
   return (
     <section
@@ -29,12 +36,16 @@ const Login = (e) => {
       <div className="bg-neutral-600 p-6 rounded-3xl w-[400px] flex flex-col justify-center items-center">
         <h1 className="text-3xl font-semibold m-4">Login</h1>
         <input
-          type="email"
-          placeholder="Email"
+          value={userName}
+          onChange={(e) => setuserName(e.target.value)}
+          type="text"
+          placeholder="User name"
           className="border-b-1  my-2 mx-4 w-[90%] p-3 "
         />
         <input
-          type="email"
+          value={Password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
           placeholder="Password"
           className="border-b-1  my-2 mx-4 w-[90%] p-3"
         />
@@ -44,6 +55,7 @@ const Login = (e) => {
         >
           Login
         </button>
+        <p className="text-red-400 my-2">{logInError}</p>
         <p className="text-center">
           Don't have an account{" "}
           <Link className="text-blue-500" href={"/auth/signup"}>

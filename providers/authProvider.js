@@ -33,8 +33,6 @@ export function AuthProvider({ children }) {
           headers: {
             "Content-Type": "application/json",
           },
-          // Remove withCredentials unless specifically needed
-          // withCredentials: true
         }
       );
 
@@ -43,8 +41,8 @@ export function AuthProvider({ children }) {
       localStorage.setItem("user", JSON.stringify(userData));
       return userData;
     } catch (error) {
-      console.error("Login error:", error);
-      throw error; // Re-throw to handle in components
+      // console.error("Login error:", error);
+      throw error;
     }
   };
 
@@ -54,29 +52,73 @@ export function AuthProvider({ children }) {
     router.push("/");
   };
 
-  const SignUp = async(email, gender, firstName, lastName)=> {
-    const id = Date.now();
-    try {
-        const data = await {
-      id: id,
-      username: firstName,
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      gender: gender,
-      image:
-     "https://cdn-icons-png.flaticon.com/128/9408/9408175.png",
-    };
-     localStorage.setItem("user", JSON.stringify(data));
-     setUser(data)
-    router.push('/')
-    return data
-    } catch (error) {
-      console.log(error)
-      throw error
-    }
-  }
+const SignUp = async (firstName, lastName, email, gender, password, username) => {
+  const newUserData = {
+    firstName,
+    lastName,
+    email,
+    gender,
+    password,
+    username,
+  };
 
+  try {
+    const response = await axios.post(
+      "https://dummyjson.com/users/add", 
+      newUserData, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // Check if the request was successful
+    if (response.status >= 200 && response.status < 300) {
+      console.log("Sign up successful:", response.data);
+      
+      // Correctly store in localStorage (convert to string)
+      localStorage.setItem("user", JSON.stringify(response.data));
+      setUser(response.data)
+      console.log(response)
+      return response.data; // Return the data for further use
+    } else {
+      throw new Error(`Server returned status: ${response.status}`);
+    }
+    
+  } catch (error) {
+    console.error("Error signing up:", error);
+    
+    // Provide more specific error message
+    const errorMessage = error.response?.data?.message 
+      || error.message 
+      || "Sign up failed";
+    
+    throw new Error(errorMessage);
+  }
+};
+  // const SignUp = async(email, gender, firstName, lastName)=> {
+  //   const id = Date.now();
+  //   try {
+  //       const data = await {
+  //     id: id,
+  //     username: firstName,
+  //     email: email,
+  //     firstName: firstName,
+  //     lastName: lastName,
+  //     gender: gender,
+  //     image:
+  //    "https://cdn-icons-png.flaticon.com/128/9408/9408175.png",
+  //   };
+  //    localStorage.setItem("user", JSON.stringify(data));
+  //    setUser(data)
+  //   router.push('/')
+  //   return data
+  //   } catch (error) {
+  //     console.log(error)
+  //     throw error
+  //   }
+  // }
 
   return (
     <AuthContext.Provider value={{ user, login, SignUp, logout }}>

@@ -1,18 +1,25 @@
 "use client";
 import React, { useState } from "react";
 import { useAuth } from "../../../../providers/authProvider";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [firstName, setfistName] = useState("");
   const [lastName, setlastName] = useState("");
+  const [userName, setuserName] = useState("");
   const [email, setemail] = useState("");
   const [gender, setgender] = useState("");
+  const [password,setpassword] = useState("")
 
   const {SignUp} = useAuth()
+  const router = useRouter()
 
   function Authenticate() {
     try {
-        SignUp(email,gender,firstName,lastName)
+        const user = SignUp(firstName,lastName,email,gender,password,userName)
+        if(user){
+          router.push('/')
+        }
         
     } catch (error) {
         console.log(error)
@@ -42,6 +49,13 @@ const SignUp = () => {
             className="border-b-1  my-2 mx-4 w-[50%] p-3 "
           />
         </div>
+          <input
+            type="text"
+            value={userName}
+            onChange={(e) => setuserName(e.target.value)}
+            placeholder="User Name"
+            className="border-b-1  my-2 mx-4 w-[90%] p-3 "
+          />
         <select onChange={(e)=>setgender(e.target.value)} className="bg-gray-200 p-3 text-black  m-5">
           <option value={"#"}>gender</option>
           <option value={"male"}>Male</option>
@@ -55,6 +69,8 @@ const SignUp = () => {
           className="border-b-1  my-2 mx-4 w-[90%] p-3 "
         />
         <input
+        value={password}
+        onChange={e=>setpassword(e.target.value)}
           type="password"
           placeholder="Password"
           className="border-b-1  my-2 mx-4 w-[90%] p-3"

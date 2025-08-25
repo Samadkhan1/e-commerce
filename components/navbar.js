@@ -181,7 +181,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link
               className="mx-2 cursor-pointer hover:bg-gray-200 bg-gray-300 rounded-lg text-black px-3 py-2 font-semibold"
-              href={"/auth"}
+              href={"/auth/login"}
             >
               Login
             </Link>
