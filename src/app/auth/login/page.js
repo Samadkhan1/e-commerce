@@ -1,4 +1,5 @@
-import react from "react";
+'use client'
+
 import Login from "../../../../components/loginform";
 
 const Auth = () => {

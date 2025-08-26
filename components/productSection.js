@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import Loader from "./loader";
-import Navbar from "./navbar";
+
+export const dynamic = 'force-dynamic'
 
 const ProductSection = () => {
   const [products, setproducts] = useState([]);
