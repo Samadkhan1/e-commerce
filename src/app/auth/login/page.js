@@ -4,7 +4,7 @@ import Login from "../../../../components/loginform";
 
 const Auth = () => {
   return (
-    <section>
+    <section className="border-1 border-gray-500 w-[100%]">
         <Login/>
     </section>
   );

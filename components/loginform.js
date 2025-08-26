@@ -31,7 +31,7 @@ const Login = () => {
   return (
     <section
       style={{ backgroundColor: "gray" }}
-      className=" text-white px-3 flex items-center justify-center min-h-screen"
+      className=" text-white px-3 flex items-center justify-center w-full min-h-screen"
     >
       <div className="bg-neutral-600 p-6 rounded-3xl w-[400px] flex flex-col justify-center items-center">
         <h1 className="text-3xl font-semibold m-4">Login</h1>
@@ -58,7 +58,7 @@ const Login = () => {
         <p className="text-red-400 my-2">{logInError}</p>
         <p className="text-center">
           Don't have an account{" "}
-          <Link className="text-blue-500" href={"/auth/signup"}>
+          <Link prefetch={false} className="text-blue-500" href={"/auth/signup"}>
             Sign Up
           </Link>
         </p>

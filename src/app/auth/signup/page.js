@@ -29,7 +29,7 @@ const SignUp = () => {
   return (
     <section
       style={{ backgroundColor: "gray" }}
-      className=" text-white px-2 flex items-center justify-center min-h-screen"
+      className=" text-white px-2 flex w-[100%] items-center justify-center min-h-screen"
     >
       <div className="bg-neutral-600 p-6 rounded-3xl w-[400px] flex flex-col">
         <h1 className="text-3xl font-semibold m-4">Sign Up</h1>
