@@ -17,7 +17,6 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
 
   const Settings = {
     dots: true,
@@ -48,32 +47,32 @@ const ProductPage = () => {
     return (originalPrice - discountAmount).toFixed(2);
   };
 
-   const getCart = () => {
+  const getCart = () => {
     try {
       const cart = localStorage.getItem("cart");
       return cart ? JSON.parse(cart) : [];
     } catch (error) {
       console.log("error getting cart", error);
-      return []
+      return [];
     }
   };
 
-const addToCart = (product, quantity = 1) => {
-  const existingItems = getCart();
-  const checkProduct = existingItems.findIndex(
-    (item) => item.id === product.id
-  );
-  if (checkProduct >= 0) {
-    existingItems[checkProduct].quantity += 1;
-  } else {
-    existingItems.unshift({
-      ...product,
-      quantity: quantity,
-      addedAt: new Date().toISOString(),
-    });
-  }
-  localStorage.setItem("cart", JSON.stringify(existingItems));
-};
+  const addToCart = (product, quantity = 1) => {
+    const existingItems = getCart();
+    const checkProduct = existingItems.findIndex(
+      (item) => item.id === product.id
+    );
+    if (checkProduct >= 0) {
+      existingItems[checkProduct].quantity += 1;
+    } else {
+      existingItems.unshift({
+        ...product,
+        quantity: quantity,
+        addedAt: new Date().toISOString(),
+      });
+    }
+    localStorage.setItem("cart", JSON.stringify(existingItems));
+  };
 
   if (error) {
     return (
@@ -96,7 +95,7 @@ const addToCart = (product, quantity = 1) => {
 
   return (
     <div className="bg-gray-200 text-gray-800  min-h-screen">
-      <Navbar/>
+      <Navbar />
       <div className="container mx-auto p-6 md:p-8">
         <div className="flex flex-col md:flex-row gap-8">
           <div className="md:w-1/2 h-fit bg-gray-300  p-8 rounded-lg">
@@ -174,7 +173,12 @@ const addToCart = (product, quantity = 1) => {
               <button className="bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-6 rounded transition">
                 Buy Now
               </button>
-              <button onClick={()=>{addToCart(product)}} className="border border-gray-800 hover:bg-gray-100 font-medium py-3 px-6 rounded transition">
+              <button
+                onClick={() => {
+                  addToCart(product);
+                }}
+                className="border border-gray-800 hover:bg-gray-100 font-medium py-3 px-6 rounded transition"
+              >
                 Add To Cart
               </button>
             </div>
@@ -230,7 +234,7 @@ const addToCart = (product, quantity = 1) => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

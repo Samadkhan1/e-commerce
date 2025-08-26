@@ -48,6 +48,7 @@ const ProductSection = () => {
       <div className="grid grid-cols-2 py-8 px-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {products.map((prod) => (
           <Link
+          prefetch={false}
             href={`/products/${prod.id}`}
             className="bg-gray-100 hover:scale-105 transition-all rounded-lg overflow-hidden shadow-md"
             key={prod.id}
