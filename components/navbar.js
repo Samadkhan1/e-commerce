@@ -110,6 +110,7 @@ const Navbar = () => {
               key={index}
               className="px-1 py-2 text-gray-50 hover:text-gray-200 font-semibold"
               href={path}
+              prefetch={false}
             >
               {path === "/" ? "HOME" : path.slice(1).toUpperCase().replace('-', ' ')}
             </Link>
@@ -147,6 +148,7 @@ const Navbar = () => {
                       key={index}
                       className="p-4 text-black hover:bg-gray-200 font-semibold border-b"
                       href={item.path}
+                      prefetch={false}
                       onClick={closeNavbar}
                     >
                       {item.label}
@@ -169,7 +171,7 @@ const Navbar = () => {
             >
               Logout
             </button>
-            <Link className="rounded-full w-8 h-8" href={"/profile"}>
+            <Link prefetch={false} className="rounded-full w-8 h-8" href={"/profile"}>
               <img
                 src={"https://cdn-icons-png.flaticon.com/128/9408/9408175.png"}
                 className="rounded-full w-full h-full object-cover"
@@ -182,6 +184,7 @@ const Navbar = () => {
             <Link
               className="mx-2 cursor-pointer hover:bg-gray-200 bg-gray-300 rounded-lg text-black px-3 py-2 font-semibold"
               href={"/auth/login"}
+              prefetch={false}
             >
               Login
             </Link>

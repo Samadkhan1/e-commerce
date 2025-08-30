@@ -6,6 +6,7 @@ import { FaSearch } from "react-icons/fa";
 import Loader from "../../../components/loader";
 import Navbar from "../../../components/navbar";
 import Footer from "../../../components/footer";
+import BackButton from "../../../components/backButton";
 
 const Shop = () => {
   const [categories, setCategories] = useState([]);
@@ -53,6 +54,7 @@ const Shop = () => {
       <Navbar/>
       <nav className="w-full bg-gray-200 flex flex-col md:flex-row justify-between p-4 gap-4">
         <div className="flex items-center">
+          <BackButton/>
           <input
             placeholder="Search"
             className="bg-white rounded-lg p-2 w-full"

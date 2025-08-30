@@ -21,30 +21,30 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const login = async (username, password) => {
-    try {
-      const response = await axios.post(
-        "https://dummyjson.com/auth/login",
-        {
-          username: username,
-          password: password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const userData = response.data;
-      setUser(userData);
-      localStorage.setItem("user", JSON.stringify(userData));
-      return userData;
-    } catch (error) {
-      // console.error("Login error:", error);
-      throw error;
+const login = async (username, password) => {
+  try {
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser ? JSON.parse(storedUser) : null;
+    
+    if (user && user.username === username && user.password === password) {
+      console.log("Logged in from stored credentials");
+      return user;
     }
-  };
+
+    const response = await axios.post('/api/login', {
+      username,
+      password
+    });
+
+    const userData = response.data;
+    
+    return userData;
+    
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
+  }
+};
 
   const logout = () => {
     setUser(null);
@@ -52,73 +52,36 @@ export function AuthProvider({ children }) {
     router.push("/");
   };
 
-const SignUp = async (firstName, lastName, email, gender, password, username) => {
-  const newUserData = {
+  const SignUp = async (
     firstName,
     lastName,
     email,
     gender,
     password,
-    username,
-  };
+    username
+  ) => {
+    const newUserData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      gender: gender,
+      password: password,
+      username: username,
+    };
 
-  try {
-    const response = await axios.post(
-      "https://dummyjson.com/users/add", 
-      newUserData, 
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    try {
+      localStorage.setItem("user", JSON.stringify(newUserData));
+      setUser(newUserData);
+      return newUserData;
+    } catch (error) {
+      console.error("Error signing up:", error);
 
-    // Check if the request was successful
-    if (response.status >= 200 && response.status < 300) {
-      console.log("Sign up successful:", response.data);
-      
-      // Correctly store in localStorage (convert to string)
-      localStorage.setItem("user", JSON.stringify(response.data));
-      setUser(response.data)
-      console.log(response)
-      return response.data; // Return the data for further use
-    } else {
-      throw new Error(`Server returned status: ${response.status}`);
+      const errorMessage =
+        error.response?.data?.message || error.message || "Sign up failed";
+
+      throw new Error(errorMessage);
     }
-    
-  } catch (error) {
-    console.error("Error signing up:", error);
-    
-    // Provide more specific error message
-    const errorMessage = error.response?.data?.message 
-      || error.message 
-      || "Sign up failed";
-    
-    throw new Error(errorMessage);
-  }
-};
-  // const SignUp = async(email, gender, firstName, lastName)=> {
-  //   const id = Date.now();
-  //   try {
-  //       const data = await {
-  //     id: id,
-  //     username: firstName,
-  //     email: email,
-  //     firstName: firstName,
-  //     lastName: lastName,
-  //     gender: gender,
-  //     image:
-  //    "https://cdn-icons-png.flaticon.com/128/9408/9408175.png",
-  //   };
-  //    localStorage.setItem("user", JSON.stringify(data));
-  //    setUser(data)
-  //   router.push('/')
-  //   return data
-  //   } catch (error) {
-  //     console.log(error)
-  //     throw error
-  //   }
-  // }
+  };
 
   return (
     <AuthContext.Provider value={{ user, login, SignUp, logout }}>

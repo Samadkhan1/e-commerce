@@ -20,7 +20,7 @@ const Login = () => {
         console.log(data);
         router.push("/");
       })
-      .catch((error) => setlogInError(error.response.data.message));
+      .catch((error) => setlogInError("User Must Be Registered Before Logging In"));
   }
 
   if (logInError) {
@@ -57,8 +57,8 @@ const Login = () => {
         </button>
         <p className="text-red-400 my-2">{logInError}</p>
         <p className="text-center">
-          Don't have an account{" "}
-          <Link prefetch={false} className="text-blue-500" href={"/auth/signup"}>
+          Don't have an account?{" "}
+          <Link prefetch={false} className="text-blue-300" href={"/auth/signup"}>
             Sign Up
           </Link>
         </p>

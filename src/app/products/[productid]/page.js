@@ -9,8 +9,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { FaStar, FaUser } from "react-icons/fa";
+import {  FaStar, FaUser } from "react-icons/fa";
 import Footer from "../../../../components/footer";
+import BackButton from "../../../../components/backButton";
 
 const ProductPage = () => {
   const { productid } = useParams();
@@ -73,6 +74,7 @@ const ProductPage = () => {
     }
     localStorage.setItem("cart", JSON.stringify(existingItems));
   };
+ 
 
   if (error) {
     return (
@@ -97,7 +99,8 @@ const ProductPage = () => {
     <div className="bg-gray-200 text-gray-800  min-h-screen">
       <Navbar />
       <div className="container mx-auto p-6 md:p-8">
-        <div className="flex flex-col md:flex-row gap-8">
+        <BackButton/>
+        <div className="flex mt-2 flex-col md:flex-row gap-8">
           <div className="md:w-1/2 h-fit bg-gray-300  p-8 rounded-lg">
             <Slider {...Settings}>
               {product?.images?.map((image, index) => (
